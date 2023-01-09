@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login/constants.dart';
-import 'package:login/home_page.dart';
-import 'package:login/signup_page.dart';
+import 'package:login/Widgets/button.dart';
+import 'package:login/views/home_page.dart';
+import 'package:login/views/signup_page.dart';
+
+import '../Widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  bool _obscureText = true;
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -45,61 +47,26 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 70),
 
               //Email Text Field
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.black26),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Email',
-                      ),
-                    ),
-                  ),
-                ),
+              TextFields(
+                hintText: 'Email',
+                obscureText: false,
               ),
 
               const SizedBox(height: 10),
 
               //Password Text Field
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(color: Colors.black26),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: TextField(
-                      controller: _passwordController,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                          child: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.black,
-                          ),
-                        ),
-                        border: InputBorder.none,
-                        hintText: 'Password',
-                      ),
-                    ),
+              TextFields(
+                hintText: 'Password',
+                obscureText: obscureText,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                  child: Icon(
+                    obscureText ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -111,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 buttonText: "Log in",
                 colour: Colors.green[400],
                 textColour: Colors.white,
+                myBorder: Border.all(color: Colors.white),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -126,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
               //Register Button
               Button(
                 buttonText: "I don't have an account",
-                colour: Colors.grey[350],
+                colour: Colors.grey[300],
                 myBorder: Border.all(
                   color: Colors.grey.shade400,
                 ),
