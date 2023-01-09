@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:login/constants.dart';
 import 'package:login/home_page.dart';
-import 'package:login/signup_page.dart';
+import 'package:login/login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
 //Text Controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -35,13 +34,15 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'LOGIN',
+                'Register',
                 style: TextStyle(
                   fontSize: 70,
                   fontWeight: FontWeight.bold,
                 ),
               ),
 
+              const SizedBox(height: 70),
+              TextFields(),
               const SizedBox(height: 70),
 
               //Email Text Field
@@ -104,9 +105,34 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
+              const SizedBox(height: 10),
+
+              //Confirm Password Text Field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(color: Colors.black26),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: TextField(
+                      controller: _passwordController,
+                      obscureText: _obscureText,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Confirm password',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
               const SizedBox(height: 25),
 
-              //Signin Button
+              //Register Button
               Button(
                 buttonText: "Log in",
                 colour: Colors.green[400],
@@ -123,9 +149,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 15),
 
-              //Register Button
+              //Login Button
               Button(
-                buttonText: "I don't have an account",
+                buttonText: "I already have an account",
                 colour: Colors.grey[350],
                 myBorder: Border.all(
                   color: Colors.grey.shade400,
@@ -135,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const SignUpPage();
+                        return const LoginPage();
                       },
                     ),
                   );
